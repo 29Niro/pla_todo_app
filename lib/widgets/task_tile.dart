@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 
 class TaskTile extends StatelessWidget {
   final String title;
+  final bool isCompleted; //false -> true
+  final VoidCallback onDelete;
+  final ValueChanged<bool?> onCheckboxChanged;
 
-  const TaskTile({super.key, required this.title});
+  const TaskTile({
+    super.key,
+    required this.title,
+    required this.onDelete,
+    required this.isCompleted,
+    required this.onCheckboxChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,21 +21,25 @@ class TaskTile extends StatelessWidget {
       color: Colors.white38,
       child: ListTile(
         leading: Checkbox(
-          value: false,
-          onChanged: (bool? value) {
-            value = false;
-          },
+          value: isCompleted,
+          onChanged: onCheckboxChanged,
         ),
         title: Text(
           title,
-          style: const TextStyle(fontSize: 16),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: isCompleted ? null : FontWeight.w800,
+            color: isCompleted ? Colors.red : Colors.green,
+            decoration: isCompleted ? TextDecoration.lineThrough : null,
+          ),
         ),
         trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.red,
-            )),
+          onPressed: onDelete,
+          icon: const Icon(
+            Icons.delete,
+            color: Colors.red,
+          ),
+        ),
       ),
     );
   }

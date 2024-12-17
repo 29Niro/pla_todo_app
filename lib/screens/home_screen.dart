@@ -10,12 +10,53 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> _tasks =
-      []; //_tasks = [{'title': 'new task'}, {'title': 'another'}];
+      []; //_tasks = [{'title': 'new task', 'isCompleted': true}];
 
   void _addTask(String taskTitle) {
     setState(() {
-      _tasks.add({'title': taskTitle});
+      _tasks.add({'title': taskTitle, 'isCompleted': false});
     });
+  }
+
+  void _deleteTask(int deleteIndex) {
+    setState(() {
+      _tasks.removeAt(deleteIndex); // 2
+    });
+  }
+
+  void _toggleTaskCompletion(int index) {
+    setState(() {
+      _tasks[index]['isCompleted'] = !_tasks[index]['isCompleted'];
+      // new bool = ! prev bool
+    });
+  }
+
+  void _showDeleteTaskDialog(BuildContext context, int index) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Are you sure ?"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Cancel")),
+              ElevatedButton(
+                onPressed: () {
+                  _deleteTask(index);
+                  Navigator.of(context).pop();
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                child: const Text(
+                  "Delete",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          );
+        });
   }
 
   void _showAddTaskDialog(BuildContext context) {
@@ -60,7 +101,19 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: _tasks.length,
         itemBuilder: (context, index) {
           final task = _tasks[index]; // task = {'title': "new 1"}
-          return TaskTile(title: task['title']); // task['title'] = "new 1"
+          return TaskTile(
+            title: task['title'],
+            isCompleted: task['isCompleted'],
+            // onDelete: () {
+            //   _deleteTask(index); //2
+            // },
+            onDelete: () {
+              _showDeleteTaskDialog(context, index);
+            },
+            onCheckboxChanged: (bool? value) {
+              _toggleTaskCompletion(index);
+            },
+          ); // task['title'] = "new 1"
         },
       ),
       floatingActionButton: FloatingActionButton(
