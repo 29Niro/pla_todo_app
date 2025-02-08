@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "177916055945",
+    "project_id": "login-sample-bf95d",
+    "storage_bucket": "login-sample-bf95d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177916055945:android:1d1df082f7ec107c241158",
+        "android_client_info": {
+          "package_name": "com.example.pla_todo_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf5vlPIrSed0k7LpA4P6BDFAQHLpreapo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177916055945:android:1e6445bfbd2443c8241158",
+        "android_client_info": {
+          "package_name": "com.niro.pla_group_academy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf5vlPIrSed0k7LpA4P6BDFAQHLpreapo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
